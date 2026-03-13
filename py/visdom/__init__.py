@@ -720,8 +720,8 @@ class Visdom(object):
         try:
             r = self.session.post(url, data=data)
         except Exception as e:
-            print(f"Failed to send post request to {url}: {e}")
-            print(
+            logger.error(f"Failed to send post request to {url}: {e}")
+            logger.error(
                 "Please check that the Visdom server is running and ensure "
                 "that the server and port parameters are correct."
             )
