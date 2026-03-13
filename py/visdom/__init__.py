@@ -719,13 +719,13 @@ class Visdom(object):
             data = {}
         try:
             r = self.session.post(url, data=data)
-        except Exception as e:
-            logger.error(f"Failed to send post request to {url}: {e}")
-            logger.error(
+         except (requests.RequestException, OSError) as e:
+            logger.exception(f"Failed to send post request to {url}: {e}")
+            logger.exception(
                 "Please check that the Visdom server is running and ensure "
                 "that the server and port parameters are correct."
             )
-            raise e
+            raise
         return r.text
 
     def _send(self, msg, endpoint="events", quiet=False, from_log=False, create=True):
