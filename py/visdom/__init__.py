@@ -725,7 +725,7 @@ class Visdom(object):
                 "Please check that the Visdom server is running and ensure "
                 "that the server and port parameters are correct."
             )
-            sys.exit(1)
+            raise e
         return r.text
 
     def _send(self, msg, endpoint="events", quiet=False, from_log=False, create=True):
