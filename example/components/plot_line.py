@@ -156,8 +156,8 @@ def plot_line_stackedarea(viz, env, args):
         opts=dict(
             fillarea=True,
             showlegend=False,
-            width=800,
-            height=800,
+            width=450,
+            height=450,
             xlabel='Time',
             ylabel='Volume',
             ytype='log',

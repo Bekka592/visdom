@@ -12,10 +12,11 @@ def text_callbacks(viz, env, args):
     # text window with Callbacks
     txt = 'This is a write demo notepad. Type below. Delete clears text:<br>'
     callback_text_window = viz.text(txt, env=env)
+    curr_txt = txt
 
     def type_callback(event):
+        nonlocal curr_txt
         if event['event_type'] == 'KeyPress':
-            curr_txt = event['pane_data']['content']
             if event['key'] == 'Enter':
                 curr_txt += '<br>'
             elif event['key'] == 'Backspace':

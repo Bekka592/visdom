@@ -717,7 +717,15 @@ class Visdom(object):
         """
         if data is None:
             data = {}
-        r = self.session.post(url, data=data)
+        try:
+            r = self.session.post(url, data=data)
+        except Exception as e:
+            print(f"Failed to send post request to {url}: {e}")
+            print(
+                "Please check that the Visdom server is running and ensure "
+                "that the server and port parameters are correct."
+            )
+            sys.exit(1)
         return r.text
 
     def _send(self, msg, endpoint="events", quiet=False, from_log=False, create=True):

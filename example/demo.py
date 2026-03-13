@@ -123,28 +123,17 @@ if __name__ == '__main__':
     DEFAULT_PORT = 8097
     DEFAULT_HOSTNAME = "http://localhost"
     parser = argparse.ArgumentParser(description='Demo arguments')
-    parser.add_argument('-port', metavar='port', type=int, default=DEFAULT_PORT,
-                        help='port the visdom server is running on.')
-    parser.add_argument('-server', metavar='server', type=str,
-                        default=DEFAULT_HOSTNAME,
-                        help='Server address of the target to run the demo on.')
-    parser.add_argument('-base_url', metavar='base_url', type=str,
-                    default='/',
-                    help='Base Url.')
-    parser.add_argument('-username', metavar='username', type=str,
-                    default='',
-                    help='username.')
-    parser.add_argument('-password', metavar='password', type=str,
-                    default='',
-                    help='password.')
-    parser.add_argument('-use_incoming_socket', metavar='use_incoming_socket', type=bool,
-                    default=True,
-                    help='use_incoming_socket.')
+    parser.add_argument('-port', metavar='port', type=int, default=DEFAULT_PORT, help='port the visdom server is running on.')
+    parser.add_argument('-server', metavar='server', type=str, default=DEFAULT_HOSTNAME, help='Server address of the target to run the demo on.')
+    parser.add_argument('-base_url', metavar='base_url', type=str, default='/', help='Base Url.')
+    parser.add_argument('-username', metavar='username', type=str, default='', help='username.')
+    parser.add_argument('-password', metavar='password', type=str, default='', help='password.')
+    parser.add_argument('-use_incoming_socket', metavar='use_incoming_socket', type=bool, default=True, help='use_incoming_socket.')
     parser.add_argument('-run', help='demo-function to run. (default: \'all\'). possible values:'+(", ".join(demos_list)), type=str, default="all")
     parser.add_argument('-env', help='env name to save demo in. By default, main is used for \'-run all\' and otherwise the demo chosen using \'-run\'.', default="")
     # parser.add_argument('-env', help='The env to save the demo to.', default="main")
     parser.add_argument('-env_suffix', help='The env suffix to save the demo to.', default="")
-    parser.add_argument('-args', nargs='*', help='Additonal arguments passed to the requested demo. (Mainly to be used for automated testing).', default="")
+    parser.add_argument('-args', nargs='*', help='Additonal arguments passed to the requested demo. (Mainly to be used for automated testing).', default=[""])
     parser.add_argument('-seed', help='Seed to use for random data in -testing mode. (Default: 42)', default=42)
     parser.add_argument('-testing', help='(To be mainly to be used for automated testing). If set to true, waits 10 seconds for callback actions and closes then automatically. Also this sets a random seed for consistent outcomes.', default=False, action='store_true')
     FLAGS = parser.parse_args()
@@ -158,6 +147,7 @@ if __name__ == '__main__':
     if FLAGS.run == "all":
         try:
             run_demo(viz, FLAGS.env if FLAGS.env else None, FLAGS.args)
+            print("Demo running! Check out the visualizations at {}:{}".format(FLAGS.server, FLAGS.port))
         except Exception as e:
             print(
                 "The visdom experienced an exception while running: {}\n"

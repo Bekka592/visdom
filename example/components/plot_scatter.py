@@ -8,11 +8,11 @@ def plot_scatter_basic(viz, env, args):
         Y=(Y[Y > 0] + 1.5).astype(int),
         opts=dict(
             legend=['Didnt', 'Update'],
-            xtickmin=-50,
-            xtickmax=50,
+            xtickmin=0,
+            xtickmax=3,
             xtickstep=0.5,
-            ytickmin=-50,
-            ytickmax=50,
+            ytickmin=0,
+            ytickmax=3,
             ytickstep=0.5,
             markersymbol='cross-thin-open',
             title=title
